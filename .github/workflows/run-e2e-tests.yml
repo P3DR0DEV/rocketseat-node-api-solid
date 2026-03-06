@@ -27,10 +27,9 @@ jobs:
         node-version: '22'
         cache: 'pnpm'
 
+
+    - name: Install dotenv-cli
+      run: npm install -g dotenv-cli
+
     - run: pnpm install --frozen-lockfile
     - run: pnpm test:e2e
-      env:
-        NODE_ENV: test
-        PORT: 3333
-        DATABASE_URL: "postgresql://postgres:docker@localhost:5432/api_solid"
-        JWT_SECRET: "tests"
