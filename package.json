@@ -1,0 +1,53 @@
+{
+  "name": "03-api-solid",
+  "version": "1.0.0",
+  "description": "GymPass Style App",
+  "main": "src/server.ts",
+  "scripts": {
+    "lint": "biome format --write ./src",
+    "dev": "node --watch --env-file .env ./src/server.ts",
+    "start": "node --env-file .env build/server.js",
+    "build": "tsup src --out-dir build",
+    "db:migrate": "drizzle-kit migrate",
+    "db:generate": "drizzle-kit generate",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "dotenv -e .env.test -- vitest run --config vitest.config.e2e.mts --pool=threads",
+    "test:watch:e2e": "dotenv -e .env.test -- vitest --config vitest.config.e2e.mts --pool=threads"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "2.3.14",
+    "@types/node": "25.2.2",
+    "@types/pg": "8.16.0",
+    "@types/supertest": "7.2.0",
+    "@vitest/coverage-v8": "4.0.18",
+    "@vitest/ui": "4.0.18",
+    "drizzle-kit": "0.31.9",
+    "supertest": "7.2.2",
+    "tsup": "8.5.1",
+    "typescript": "^5.9.3",
+    "unplugin-swc": "1.5.9",
+    "vitest": "4.0.18"
+  },
+  "dependencies": {
+    "@fastify/cookie": "11.0.2",
+    "@fastify/jwt": "10.0.0",
+    "bcryptjs": "3.0.3",
+    "dayjs": "1.11.19",
+    "dotenv": "17.2.4",
+    "drizzle-orm": "0.45.1",
+    "fastify": "5.7.4",
+    "pg": "8.18.0",
+    "zod": "4.3.6"
+  },
+  "imports": {
+    "#src/*": "./src/*",
+    "#test/*": "./test/*"
+  }
+}
