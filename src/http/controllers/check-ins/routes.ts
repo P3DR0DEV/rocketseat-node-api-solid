@@ -12,5 +12,5 @@ export async function checkInsRoutes(app: FastifyInstance) {
   app.post('/check-ins', createCheckIn)
   app.get('/check-ins/metrics', getUserMetrics)
   app.get('/check-ins/history', fetchUserCheckInsHistory)
-  app.patch('/check-ins/:checkInId/validate', { onRequest: [verifyUserRole('ADMIN')] }, validateCheckIn)
+  app.patch('/check-ins/:checkInId/validate', { preHandler: [verifyUserRole('ADMIN')] }, validateCheckIn)
 }

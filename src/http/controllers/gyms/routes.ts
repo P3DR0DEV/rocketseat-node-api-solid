@@ -8,7 +8,7 @@ import { searchGyms } from './search.ts'
 export async function gymRoutes(app: FastifyInstance) {
   app.addHook('preHandler', verifyJwt)
 
-  app.post('/gyms', { onRequest: [verifyUserRole('ADMIN')] }, createGym)
+  app.post('/gyms',{ preHandler: verifyUserRole('ADMIN') }, createGym)
   app.get('/gyms/search', searchGyms)
   app.get('/gyms/nearby', fetchNearbyGyms)
 }

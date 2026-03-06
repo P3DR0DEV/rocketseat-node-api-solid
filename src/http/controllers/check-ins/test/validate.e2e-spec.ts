@@ -16,6 +16,7 @@ describe('Validate Check-in E2E', () => {
   })
 
   it('Should be able to validate a check-in.', async () => {
+    // MUST BE ADMIN TO CREATE GYMS TO VALIDATE CHECK-INS FOR THAT GYM
     const { token } = await createAndAuthenticateUser(appForTest, true)
 
     const user = (await databaseForTest.select().from(users)).find((user) => user.email === 'pedro@mendes.com.br')

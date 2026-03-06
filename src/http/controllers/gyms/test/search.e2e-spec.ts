@@ -12,7 +12,8 @@ describe('Search Gyms E2E', () => {
   })
 
   it('Should be able to search paginated gyms.', async () => {
-    const { token } = await createAndAuthenticateUser(appForTest)
+    // MUST BE ADMIN TO CREATE GYMS BEFORE SEARCHING THEM
+    const { token } = await createAndAuthenticateUser(appForTest, true)
     await supertest(appForTest.server).post('/gyms').set('Authorization', `Bearer ${token}`).send({
       title: 'Gym1',
       description: 'description',
