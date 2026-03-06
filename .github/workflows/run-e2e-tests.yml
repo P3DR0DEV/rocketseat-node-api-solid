@@ -1,0 +1,36 @@
+name: Run e2e tests
+
+on: [pull_request]
+
+jobs:
+  run-e2e-tests:
+    name: Run e2e tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: bitnami/postgresql:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DB: api_solid
+
+    steps:
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 10
+    - uses: actions/setup-node@v6
+      with:
+        node-version: '22'
+        cache: 'pnpm'
+
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm test:e2e
+      env:
+        NODE_ENV: test
+        PORT: 3333
+        DATABASE_URL: "postgresql://postgres:docker@localhost:5432/api_solid"
+        JWT_SECRET: "tests"
